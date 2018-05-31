@@ -12,4 +12,6 @@ public interface LoginService {
 
 	List<User> getUsers();
 
+	User loginUser(User login_user);
+
 }

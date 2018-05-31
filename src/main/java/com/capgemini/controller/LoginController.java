@@ -33,4 +33,13 @@ public class LoginController {
 		return loginService.getUsers();
 	}
 	
+	@RequestMapping(value = "/userLogin?login_username={login_username}&login_password={login_password}", method = RequestMethod.POST)
+	public @ResponseBody User loginUser(@PathVariable(value="login_username") String username, @PathVariable(value="login_password") String password) {
+		User login_user = new User();
+		login_user.setUsername(username);
+		login_user.setPassword(password);
+		
+		// returns null if not authenticated, otherwise returns row from user db
+		return loginService.loginUser(login_user);
+	}
 }

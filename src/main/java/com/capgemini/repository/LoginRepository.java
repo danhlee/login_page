@@ -10,4 +10,6 @@ public interface LoginRepository {
 
 	List<User> getUsers();
 
+	User findUser(User user);
+
 }

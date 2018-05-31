@@ -72,5 +72,11 @@ public class LoginRepositoryImpl implements LoginRepository {
 		
 		return rides;
 	}
-
+	
+	@Override
+	public User findUser(User login_user) {
+		User user = jdbcTemplate.queryForObject("select * from user where username = ?", new UserRowMapper(), login_user.getUsername());
+		
+		return user;
+	}
 }

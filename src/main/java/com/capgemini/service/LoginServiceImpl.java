@@ -29,5 +29,19 @@ public class LoginServiceImpl implements LoginService {
 	public List<User> getUsers() {
 		return loginRepository.getUsers();
 	}
+	
+	@Override
+	public User loginUser(User login_user) {
+		
+		User db_user = loginRepository.findUser(login_user);
+		
+		// if user exists and password matches, return user row from DB
+		if (db_user != null & login_user.getPassword().equals(db_user.getPassword())) {
+			return db_user;
+		}
+		
+		// if user doesn't exist or password incorrect, return null
+		return null;
+	}
 
 }
