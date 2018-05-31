@@ -3,10 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<display-name>ride_tracker</display-name>
+	<display-name>login_page</display-name>
 
 	<servlet>
-		<servlet-name>rideTrackerServlet</servlet-name>
+		<servlet-name>loginPageServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -18,7 +18,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>rideTrackerServlet</servlet-name>
+		<servlet-name>loginPageServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 
 	</servlet-mapping>
