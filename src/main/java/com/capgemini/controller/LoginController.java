@@ -2,6 +2,9 @@ package com.capgemini.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,11 +36,22 @@ public class LoginController {
 		return loginService.getUsers();
 	}
 	
-	@RequestMapping(value = "/userLogin?login_username={login_username}&login_password={login_password}", method = RequestMethod.POST)
-	public @ResponseBody User loginUser(@PathVariable(value="login_username") String username, @PathVariable(value="login_password") String password) {
+//	@RequestMapping(value = "/userLogin?login_username={login_username}&login_password={login_password}", method = RequestMethod.POST)
+//	public @ResponseBody User loginUser(@PathVariable(value="login_username") String username, @PathVariable(value="login_password") String password) {
+//		User login_user = new User();
+//		login_user.setUsername(username);
+//		login_user.setPassword(password);
+//		
+//		// returns null if not authenticated, otherwise returns row from user db
+//		return loginService.loginUser(login_user);
+//	}
+	
+	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+	public @ResponseBody User loginUser(HttpServletRequest request, HttpServletResponse response) {
+		
 		User login_user = new User();
-		login_user.setUsername(username);
-		login_user.setPassword(password);
+		login_user.setUsername(request.getParameter("login_username"));
+		login_user.setPassword(request.getParameter("login_password"));
 		
 		// returns null if not authenticated, otherwise returns row from user db
 		return loginService.loginUser(login_user);

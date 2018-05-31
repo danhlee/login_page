@@ -3,6 +3,7 @@ package com.capgemini.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -75,7 +76,14 @@ public class LoginRepositoryImpl implements LoginRepository {
 	
 	@Override
 	public User findUser(User login_user) {
-		User user = jdbcTemplate.queryForObject("select * from user where username = ?", new UserRowMapper(), login_user.getUsername());
+		
+		User user = null;
+		
+		try {
+			user = jdbcTemplate.queryForObject("select * from user where username = ?", new UserRowMapper(), login_user.getUsername());			
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("User does not exist!");
+		}
 		
 		return user;
 	}

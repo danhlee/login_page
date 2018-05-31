@@ -36,8 +36,13 @@ public class LoginServiceImpl implements LoginService {
 		User db_user = loginRepository.findUser(login_user);
 		
 		// if user exists and password matches, return user row from DB
-		if (db_user != null & login_user.getPassword().equals(db_user.getPassword())) {
+		if (db_user != null && login_user.getPassword().equals(db_user.getPassword())) {
+			System.out.println("Login Successful!");
+			
 			return db_user;
+		}
+		else if (db_user != null && !login_user.getPassword().equals(db_user.getPassword())) {
+			System.out.println("Password is incorrect!");
 		}
 		
 		// if user doesn't exist or password incorrect, return null
