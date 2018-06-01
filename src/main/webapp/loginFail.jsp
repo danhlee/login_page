@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>Login Failed!</h1>
+	<h2>${msg}</h2>
 	<p><a href="http://localhost:8080/login_page/">Return to Login Page</a></p>
 </body>
 </html>

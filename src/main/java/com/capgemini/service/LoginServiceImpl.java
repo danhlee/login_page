@@ -43,13 +43,15 @@ public class LoginServiceImpl implements LoginService {
 		}
 		else if (db_user != null && !login_user.getPassword().equals(db_user.getPassword())) {
 			System.out.println("Password is incorrect!");
+			throw new RuntimeException("msg: Password is incorrect!");
 		}
 		else {
 			System.out.println("User does not exist!");
+			throw new RuntimeException("msg: User does not exist!");
 		}
 		
 		// if user doesn't exist or password incorrect, return null
-		return null;
+		//return null;
 	}
 
 }
