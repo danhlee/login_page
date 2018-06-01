@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.capgemini.model.User;
 import com.capgemini.service.LoginService;
@@ -47,13 +49,25 @@ public class LoginController {
 //	}
 	
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-	public @ResponseBody User loginUser(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView loginUser(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelMap model = new ModelMap();
 		
 		User login_user = new User();
 		login_user.setUsername(request.getParameter("login_username"));
 		login_user.setPassword(request.getParameter("login_password"));
 		
 		// returns null if not authenticated, otherwise returns row from user db
-		return loginService.loginUser(login_user);
+		User db_user = loginService.loginUser(login_user);
+		if (db_user != null) {
+			model.addAttribute("username", db_user.getUsername());
+			model.addAttribute("password", db_user.getPassword());
+			return new ModelAndView("welcome", model);
+		}
+		else {
+			return new ModelAndView("loginFail");
+		}
+		
+		
 	}
 }
